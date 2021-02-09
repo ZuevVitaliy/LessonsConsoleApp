@@ -11,37 +11,114 @@ using System.IO;
 
 namespace LessonsConsoleApp
 {
+    public delegate void MessageHandler(double value);
+
     public partial class Program
     {
         static void Main(string[] args)
         {
-            while (true)
+            List<ISpecialist> specialists = new List<ISpecialist>();
+            ISpecialist medic = new Medic("Валерий", 34);
+            ISpecialist programmer = new Programmer("Виталий", 32);
+
+            specialists.Add(medic);
+            specialists.Add(programmer);
+
+            foreach (ISpecialist specialist in specialists)
             {
-                Console.WriteLine("Введите количество входящего урона");
-                string damage = Console.ReadLine();
+                specialist.ToWork();
 
-                Warrior[] warriors = new[]
-                {
-                    new Warrior(),
-                    new WarriorInLightArmor(),
-                    new WarriorInHeavyArmor()
-                };
-
-                foreach (var warrior in warriors)
-                {
-                    warrior.GetDamage(double.Parse(damage));
-                    Console.WriteLine(warrior.HP <= 0
-                        ? "Воин убит!"
-                        : $" Осталось {warrior.HP} жизней." +
-                          $" Осталось {warrior.Armor} брони");
-                }
-
-                Console.ReadKey();
+                var prog = specialist as IProgrammer;
+                prog?.ToWork();
+                var guard = specialist as IGuardian;
+                guard?.ToWork();
             }
+
+            Console.ReadKey();
+        }
+
+        public abstract class Human : ISpecialist
+        {
+            public string Name { get; set; }
+            public int Age { get; set; }
+
+            public Human(string name, int age)
+            {
+                Name = name;
+                Age = age;
+            }
+
+            public void ToWork()
+            {
+                Console.WriteLine($"Меня зовут {Name}, мне {Age} и я работаю");
+            }
+        }
+
+        public class Programmer : Human, IProgrammer, IGuardian
+        {
+           
+            void IProgrammer.ToWork()
+            {
+                Console.WriteLine($"Меня зовут {Name}, мне {Age} и я программирую");
+            }
+
+            void IGuardian.ToWork()
+            {
+                Console.WriteLine($"Меня зовут {Name}, мне {Age} и я охраняю");
+            }
+
+            public Programmer(string name, int age) : base(name, age)
+            {
+            }
+        }
+
+        public class Medic : Human, IMedic
+        {
+            public void ToWork()
+            {
+                Console.WriteLine($"Меня зовут {Name}, мне {Age} и я лечу людей");
+            }
+
+            public Medic(string name, int age) : base(name, age)
+            {
+            }
+        }
+
+        interface ISpecialist
+        {
+            void ToWork();
+        }
+
+        interface IProgrammer : ISpecialist
+        {
+            void ToWork();
+        }
+
+        interface IMedic : ISpecialist
+        {
+            void ToWork();
+        }
+
+        interface IGuardian : ISpecialist
+        {
+            void ToWork();
         }
         public class Warrior
         {
-            public double HP { get; set; } 
+            private double mHp;
+            public double HP
+            {
+                get => mHp;
+                set
+                {
+                    double oldValue = mHp;
+                    mHp = value;
+                    HealthPointsChanged?.Invoke(value);
+                }
+            }
+
+            public event MessageHandler HealthPointsChanged;
+
             public double Armor { get; set; }
 
             public Warrior()
@@ -82,11 +159,11 @@ namespace LessonsConsoleApp
 
             }
 
-            
 
-    }
 
-    public class WarriorInHeavyArmor : Warrior
+        }
+
+        public class WarriorInHeavyArmor : Warrior
         {
             public WarriorInHeavyArmor()
             {
@@ -109,6 +186,7 @@ namespace LessonsConsoleApp
                 }
             }
         }
+
 
     }
 
@@ -220,7 +298,7 @@ namespace LessonsConsoleApp
     //            this.mStudentship = studentship;
     //        }
     //    }
-       
+
     //    public abstract class Animal
     //    {
     //        public string Name { get; set; }
