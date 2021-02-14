@@ -17,24 +17,34 @@ namespace LessonsConsoleApp
     {
         static void Main(string[] args)
         {
-            List<ISpecialist> specialists = new List<ISpecialist>();
-            ISpecialist medic = new Medic("Валерий", 34);
-            ISpecialist programmer = new Programmer("Виталий", 32);
+            List<string> names = new List<string>();
+            names.Add("Виталий");
+            names.Add("Алексей");
+            names.Add("Юлия");
+            names.Add("Владимир");
+            names.Add("Станiслав");
 
-            specialists.Add(medic);
-            specialists.Add(programmer);
-
-            foreach (ISpecialist specialist in specialists)
-            {
-                specialist.ToWork();
-
-                var prog = specialist as IProgrammer;
-                prog?.ToWork();
-                var guard = specialist as IGuardian;
-                guard?.ToWork();
-            }
+            ShowNames(names);
+            ShowNames(names, ";");
 
             Console.ReadKey();
+        }
+
+        public static void ShowNames(List<string> names)
+        {
+            ShowNames(names, ",");
+        }
+
+        public static void ShowNames(List<string> names, string separator)
+        {
+            for (int i = 0; i < names.Count; i++)
+            {
+                if (i < names.Count - 1)
+                {
+                    Console.Write((names[i]) + separator);
+                }
+                else Console.WriteLine(names[i]);
+            }
         }
 
         public abstract class Human : ISpecialist
