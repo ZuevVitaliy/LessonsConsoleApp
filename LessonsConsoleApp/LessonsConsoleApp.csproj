@@ -43,6 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OverrideOperators\GayFamily.cs" />
+    <Compile Include="OverrideOperators\Human.cs" />
+    <Compile Include="OverrideOperators\Family.cs" />
+    <Compile Include="OverrideOperators\LesbianFamily.cs" />
+    <Compile Include="OverrideOperators\StandardFamily.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramFunctions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
