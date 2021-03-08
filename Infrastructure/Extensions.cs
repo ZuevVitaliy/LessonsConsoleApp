@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Infrastructure
 {
@@ -10,8 +11,6 @@ namespace Infrastructure
 
         public static void ForEach<T>(this IEnumerable<T> target, Action<T> action)
         {
-            if (target == null)
-                return;
             foreach (var el in target)
             {
                 action(el);
@@ -45,16 +44,8 @@ namespace Infrastructure
 
         public static bool IsDigit(this char ch)
         {
-            return ch == '0' ||
-                   ch == '1' ||
-                   ch == '2' ||
-                   ch == '3' ||
-                   ch == '4' ||
-                   ch == '5' ||
-                   ch == '6' ||
-                   ch == '7' ||
-                   ch == '8' ||
-                   ch == '9';
+            char[] chars = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+            return chars.Any(x => x == ch);
         }
     }
 }

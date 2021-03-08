@@ -39,10 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parkan\Constelation.cs" />
-    <Compile Include="Parkan\Lentis.cs" />
-    <Compile Include="Parkan\Sector.cs" />
-    <Compile Include="Parkan\StarSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VitProgram.cs" />
   </ItemGroup>
