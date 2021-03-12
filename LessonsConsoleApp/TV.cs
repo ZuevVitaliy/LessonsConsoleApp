@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Infrastructure;
 
 namespace LessonsConsoleApp
 {
@@ -131,7 +132,7 @@ namespace LessonsConsoleApp
                             Console.WriteLine("Введите номер канала:");
                             string str = Console.ReadLine();
                             Console.WriteLine();
-                            if (Program.CheckForDigit(str))
+                            if (str.IsNumericString())
                             {
                                 int channel = Convert.ToInt32(str);
                                 myTv.ToChannel(channel);

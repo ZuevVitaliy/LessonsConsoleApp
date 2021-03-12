@@ -21,7 +21,7 @@ namespace Infrastructure
         {
             int result = 0;
 
-            if (string.IsNullOrEmpty(targetString) || string.IsNullOrEmpty(searchingSubstring))
+            if (String.IsNullOrEmpty(targetString) || String.IsNullOrEmpty(searchingSubstring))
                 return result;
 
             for (int i = 0, j = 0; i < targetString.Length; i++, j++)
@@ -42,10 +42,14 @@ namespace Infrastructure
             return result;
         }
 
-        public static bool IsDigit(this char ch)
+        public static bool IsBinaryNumericString(this string number)
         {
-            char[] chars = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
-            return chars.Any(x => x == ch);
+            return number.All(ch => ch == '0' || ch == '1');
+        }
+
+        public static bool IsNumericString(this string targetString)
+        {
+            return targetString.All(char.IsDigit);
         }
     }
 }

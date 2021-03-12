@@ -127,7 +127,7 @@ namespace LessonsConsoleApp
 
         public static string ToBinary(string number)
         {
-            if (CheckForDigit(number) == false)
+            if (!number.IsNumericString())
             {
                 return "Неверный формат числа";
             }
@@ -142,32 +142,6 @@ namespace LessonsConsoleApp
             } while (num != 0);
 
             return result;
-        }
-
-        public static bool CheckForBinaryDigit(string number)
-        {
-            foreach (char sym in number)
-            {
-                if (sym != '0' || sym != '1')
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        public static bool CheckForDigit(string number)
-        {
-            foreach (char sym in number)
-            {
-                if (!sym.IsDigit())
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
 
         public static double Hypotenuse(double leg1, double leg2)
