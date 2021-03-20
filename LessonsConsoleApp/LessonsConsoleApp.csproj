@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OverrideEquals\Circle.cs" />
+    <Compile Include="OverrideEquals\Point.cs" />
     <Compile Include="OverrideOperators\GayFamily.cs" />
     <Compile Include="OverrideOperators\Human.cs" />
     <Compile Include="OverrideOperators\Family.cs" />
